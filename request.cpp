@@ -1,32 +1,32 @@
 /******************************************************************************
- 
+
  Filename:		request.cpp
  Description:	Request code for the WiServer library
- 
+
  ******************************************************************************
- 
+
  Copyright(c) 2009 Mark A. Patel  All rights reserved.
- 
+
  This program is free software; you can redistribute it and/or modify it
  under the terms of version 2 of the GNU General Public License as
  published by the Free Software Foundation.
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  more details.
- 
+
  You should have received a copy of the GNU General Public License along with
  this program; if not, write to the Free Software Foundation, Inc., 59
  Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- 
+
  Contact Information:
- 
+
  Author               Date        Comment
  ---------------------------------------------------------------
  Mark A. Patel		06/20/2009	Initial version
- 
- 
+
+
  *****************************************************************************/
 
 #include "WiServer.h"
@@ -47,7 +47,7 @@ GETrequest::GETrequest(uint8* ipAddr, int port, char* hostName, char* URL) {
 	// Store host name and URL
 	this->hostName = hostName;
 	this->URL = URL;
-	
+
 	// Set remaining members to NULL
 	this->auth = NULL;
 	this->returnFunc = NULL;
@@ -69,30 +69,33 @@ void GETrequest::setURL(char* URL) {
 	if (!this->active) this->URL = URL;
 }
 
-void GETrequest::submit() {	
+void GETrequest::submit() {
 	// Ignore submit request if already active
 	if (!this->active) WiServer.submitRequest(this);
 }
 
-boolean GETrequest::isActive() {	
-	return this->active;
-}
+#if defined(ARDUINO) && ARDUINO >= 100
+	bool GETrequest::isActive() {
+		return this->active;
+	}
+#else
+	boolean GETrequest::isActive() {
+		return this->active;
+	}
+#endif
 
-
-
-
-POSTrequest::POSTrequest(uint8* ipAddr, int port, char* hostName, char* URL, bodyFunction body) : 
+POSTrequest::POSTrequest(uint8* ipAddr, int port, char* hostName, char* URL, bodyFunction body) :
     // Create a request with the IP, port, host name and URL
 	GETrequest (ipAddr, port, hostName, URL) {
 		// Set the body callback function
 		this->body = body;
 }
-		
+
 void POSTrequest::setBodyFunc(bodyFunction body) {
 	if (!this->active) this->body = body;
 }
 
-TWEETrequest::TWEETrequest(char* auth, bodyFunction message) : 
+TWEETrequest::TWEETrequest(char* auth, bodyFunction message) :
     // Create a POST request with the Twitter-specific data
 	POSTrequest (twitterIP, 80, twitterHost, twitterURL, message) {
 		// Set the auth string

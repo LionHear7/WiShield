@@ -36,44 +36,89 @@
 // They are stored in program memory to reduce RAM usage.
 
 // HTTP OK response
-const prog_char httpOK[] = {"HTTP/1.0 200 OK"};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char httpOK[] = {"HTTP/1.0 200 OK"};
+#else
+  const prog_char httpOK[] = {"HTTP/1.0 200 OK"};
+#endif
 
 // HTTP Not Found response
-const prog_char httpNotFound[] = {"HTTP/1.0 404 Not Found"};
-
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char httpNotFound[] = {"HTTP/1.0 404 Not Found"};
+#else
+  const prog_char httpNotFound[] = {"HTTP/1.0 404 Not Found"};
+#endif
 
 #ifdef ENABLE_CLIENT_MODE
 
 // Trailing HTTP/1.0 for GET and POST requests
-const prog_char http10[] = {" HTTP/1.0"};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char http10[] = {" HTTP/1.0"};
+#else
+  const prog_char http10[] = {" HTTP/1.0"};
+#endif
 
 // Authorization: Basic field name
-const prog_char authBasic[] = {"Authorization: Basic "};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char authBasic[] = {"Authorization: Basic "};
+#else
+  const prog_char authBasic[] = {"Authorization: Basic "};
+#endif
 
 // Content-Length field name
-const prog_char contentLength[] = {"Content-Length:     "};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char contentLength[] = {"Content-Length:     "};
+#else
+  const prog_char contentLength[] = {"Content-Length:     "};
+#endif
 
 // User agent field with value
-const prog_char userAgent[] = {"User-Agent: WiServer/1.1"};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char userAgent[] = {"User-Agent: WiServer/1.1"};
+#else
+  const prog_char userAgent[] = {"User-Agent: WiServer/1.1"};
+#endif
 
 // Content type form data
-const prog_char contentTypeForm[] = {"Content-Type: application/x-www-form-urlencoded"};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char contentTypeForm[] = {"Content-Type: application/x-www-form-urlencoded"};
+#else
+  const prog_char contentTypeForm[] = {"Content-Type: application/x-www-form-urlencoded"};
+#endif
 
 // POST request
-const prog_char post[] = {"POST "};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char post[] = {"POST "};
+#else
+  const prog_char post[] = {"POST "};
+#endif
 
 // GET request
-const prog_char get[] = {"GET "};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char get[] = {"GET "};
+#else
+  const prog_char get[] = {"GET "};
+#endif
 
 // Host, User-Agent, and Content-Type lines for Twitter POSTs
-const prog_char host[] = {"Host: "};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char host[] = {"Host: "};
+#else
+  const prog_char host[] = {"Host: "};
+#endif
 
 // Status prefix for Twitter
-const prog_char status[] = {"status="};
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char status[] = {"status="};
+#else
+  const prog_char status[] = {"status="};
+#endif
 
 /* Base64 Encoder data */
-const prog_char base64Chars[] PROGMEM = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"};
-
+#if defined(ARDUINO) && ARDUINO >= 100
+  const char base64Chars[] PROGMEM = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"};
+#else
+  const prog_char base64Chars[] PROGMEM = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"};
+#endif
 
 #endif // ENABLE_CLIENT_MODE
-

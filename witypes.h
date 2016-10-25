@@ -62,11 +62,19 @@ typedef volatile unsigned long vuint32;
 
 typedef unsigned char u8;
 typedef unsigned char U8;
-typedef unsigned int u16;
+
 typedef unsigned int U16;
 typedef unsigned long u32;
 typedef unsigned long U32;
 
-typedef uint8_t boolean;
+
+#if defined(ARDUINO) && ARDUINO >= 100
+  typedef unsigned short u16;
+  //typedef uint8_t boolean;
+#else
+  typedef unsigned int u16;
+  typedef uint8_t boolean;
+#endif
+
 
 #endif /* WITYPES_H_ */

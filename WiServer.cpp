@@ -34,8 +34,12 @@
 
  *****************************************************************************/
 
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
 
-#include "WProgram.h"
 #include "WiServer.h"
 
 extern "C" {
@@ -54,20 +58,33 @@ extern "C" {
 #define LF 10
 
 // Strings stored in program memory (defined in strings.c)
-extern const prog_char httpOK[];
-extern const prog_char httpNotFound[];
-extern const prog_char http10[];
-extern const prog_char post[];
-extern const prog_char get[];
-extern const prog_char authBasic[];
-extern const prog_char host[];
-extern const prog_char userAgent[];
-extern const prog_char contentTypeForm[];
-extern const prog_char contentLength[];
-extern const prog_char status[];
-extern const prog_char base64Chars[];
-
-
+#if defined(ARDUINO) && ARDUINO >= 100
+  extern const char httpOK[];
+  extern const char httpNotFound[];
+  extern const char http10[];
+  extern const char post[];
+  extern const char get[];
+  extern const char authBasic[];
+  extern const char host[];
+  extern const char userAgent[];
+  extern const char contentTypeForm[];
+  extern const char contentLength[];
+  extern const char status[];
+  extern const char base64Chars[];
+#else
+  extern const prog_char httpOK[];
+  extern const prog_char httpNotFound[];
+  extern const prog_char http10[];
+  extern const prog_char post[];
+  extern const prog_char get[];
+  extern const prog_char authBasic[];
+  extern const prog_char host[];
+  extern const prog_char userAgent[];
+  extern const prog_char contentTypeForm[];
+  extern const prog_char contentLength[];
+  extern const prog_char status[];
+  extern const prog_char base64Chars[];
+#endif
 
 /* Application's callback function for serving pages */
 pageServingFunction callbackFunc;
@@ -209,8 +226,7 @@ void Server::printTime(long t) {
 /*
  * Writes a byte to the virtual buffer for the current connection
  */
-void Server::write(uint8_t b) {
-
+size_t Server::write(uint8_t b) {
 	// Make sure there's a current connection
 	if (uip_conn) {
 		// Check if the cursor is within the range that maps to the uip_appdata buffer
@@ -639,7 +655,7 @@ char getChar(int nibble) {
 }
 
 void storeBlock(char* src, char* dest, int len) {
-	
+
 	dest[0] = getChar(src[0] >> 2);
 	dest[1] = getChar(((src[0] & 0x03) << 4) | ((src[1] & 0xf0) >> 4));
 	dest[2] = len > 1 ? getChar(((src[1] & 0x0f) << 2) | ((src[2] & 0xc0) >> 6)) : '=';
@@ -647,14 +663,14 @@ void storeBlock(char* src, char* dest, int len) {
 }
 
 char* Server::base64encode(char* data) {
-	
+
 	int len = strlen(data);
 	int outLenPadded = ((len + 2) / 3) << 2;
 	char* out = (char*)malloc(outLenPadded + 1);
-	
+
 	char* outP = out;
 	while (len > 0) {
-		
+
 		storeBlock(data, outP, min(len,3));
 		outP += 4;
 		data += 3;
