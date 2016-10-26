@@ -30,6 +30,7 @@
   ---------------------------------------------------------------
    AsyncLabs			05/01/2009	Initial version
    AsyncLabs			05/29/2009	Adding support for new library
+   Lionhear7      10/26/2016  Adding compatibility to Arduino IDE 1.xx
 
  *****************************************************************************/
 

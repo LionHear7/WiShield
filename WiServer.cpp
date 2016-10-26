@@ -31,6 +31,8 @@
 								    multi-pass transmission, local client
 								    checks, activity LED support, etc.
 
+  Lionhear7         10/26/2016  Adding compatibility to Arduino IDE 1.xx
+
 
  *****************************************************************************/
 

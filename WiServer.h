@@ -33,6 +33,8 @@
 
    Mark A. Patel		06/22/2009	Revised client API
 
+	 Lionhear7      10/26/2016  Adding compatibility to Arduino IDE 1.xx
+
 
  *****************************************************************************/
 
@@ -112,7 +114,7 @@ class GETrequest
 		#else
 			boolean isActive();
 		#endif
-		
+
 		/*
 		 * Sets the URL for the request.  Calls to this method will be ignored if the request
 		 * has been submitted and is currently being processed by WiServer.

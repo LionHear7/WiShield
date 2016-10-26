@@ -25,6 +25,7 @@
    Author               Date        Comment
   ---------------------------------------------------------------
    Mark A. Patel		06/10/2009	Initial version
+   Lionhear7        10/26/2016  Adding compatibility to Arduino IDE 1.xx
 
  *****************************************************************************/
 

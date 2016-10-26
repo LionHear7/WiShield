@@ -29,6 +29,7 @@
    Author               Date        Comment
   ---------------------------------------------------------------
    AsyncLabs			05/29/2009	Initial port
+   Lionhear7      10/26/2016  Adding compatibility to Arduino IDE 1.xx
 
  *****************************************************************************/
 
